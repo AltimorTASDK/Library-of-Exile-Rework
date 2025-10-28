@@ -16,6 +16,14 @@ public class DungeonBuilder {
         public int maxRooms;
         public IDungeon dungeon;
 
+        @Deprecated
+        public Settings(Random ran, int minRooms, int maxRooms, List<IDungeon> dungeons) {
+            this.ran = ran;
+            this.minRooms = minRooms;
+            this.maxRooms = maxRooms;
+            this.dungeon = RandomUtils.weightedRandom(dungeons, ran.nextDouble());
+        }
+
         public Settings(Random ran, int minRooms, int maxRooms, IDungeon dungeon) {
             this.ran = ran;
             this.minRooms = minRooms;
