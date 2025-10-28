@@ -16,6 +16,9 @@ public class DungeonBuilder {
         public int maxRooms;
         public IDungeon dungeon;
 
+        /**
+         * @deprecated Use {@link #Settings(Random, int, int, IDungeon)} instead.
+         */
         @Deprecated
         public Settings(Random ran, int minRooms, int maxRooms, List<IDungeon> dungeons) {
             this.ran = ran;
