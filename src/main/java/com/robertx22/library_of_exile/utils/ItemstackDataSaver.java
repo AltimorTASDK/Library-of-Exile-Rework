@@ -39,6 +39,12 @@ public class ItemstackDataSaver<T> implements IGUID {
                 .contains(id);
     }
 
+    public void removeFrom(ItemStack stack) {
+        if (stack != null && stack.hasTag()) {
+            stack.getTag().remove(id);
+        }
+    }
+
     public T loadFrom(ItemStack stack) {
 
         if (stack == null) {
