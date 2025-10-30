@@ -14,13 +14,24 @@ public class DungeonBuilder {
         public Random ran;
         public int minRooms;
         public int maxRooms;
-        public List<IDungeon> possibleDungeons;
+        public IDungeon dungeon;
 
-        public Settings(Random ran, int minRooms, int maxRooms, List<IDungeon> possibleDungeons) {
+        /**
+         * @deprecated Use {@link #Settings(Random, int, int, IDungeon)} instead.
+         */
+        @Deprecated
+        public Settings(Random ran, int minRooms, int maxRooms, List<IDungeon> dungeons) {
             this.ran = ran;
             this.minRooms = minRooms;
             this.maxRooms = maxRooms;
-            this.possibleDungeons = possibleDungeons;
+            this.dungeon = RandomUtils.weightedRandom(dungeons, ran.nextDouble());
+        }
+
+        public Settings(Random ran, int minRooms, int maxRooms, IDungeon dungeon) {
+            this.ran = ran;
+            this.minRooms = minRooms;
+            this.maxRooms = maxRooms;
+            this.dungeon = dungeon;
         }
     }
 
@@ -28,7 +39,7 @@ public class DungeonBuilder {
     // random must be deterministic, 1 dungeon = 1 random
     public DungeonBuilder(Settings settings) {
         this.rand = settings.ran;
-        this.dungeon = RandomUtils.weightedRandom(settings.possibleDungeons, rand.nextDouble());
+        this.dungeon = settings.dungeon;
         this.size = RandomUtils.RandomRange(settings.minRooms, settings.maxRooms, rand);
     }
 
